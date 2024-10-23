@@ -25,8 +25,6 @@ export const calculateCartTotal = (cart: CartItem[], selectedCoupon: Coupon | nu
     totalAfterDiscount += calculateItemTotal(item);
   });
 
-  let totalDiscount = totalBeforeDiscount - totalAfterDiscount;
-
   // 쿠폰 적용
   if (selectedCoupon) {
     if (selectedCoupon.discountType === "amount") {
@@ -34,8 +32,9 @@ export const calculateCartTotal = (cart: CartItem[], selectedCoupon: Coupon | nu
     } else {
       totalAfterDiscount *= 1 - selectedCoupon.discountValue / 100;
     }
-    totalDiscount = totalBeforeDiscount - totalAfterDiscount;
   }
+
+  const totalDiscount = totalBeforeDiscount - totalAfterDiscount;
 
   return {
     totalBeforeDiscount: Math.round(totalBeforeDiscount),
