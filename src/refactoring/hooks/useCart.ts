@@ -10,9 +10,11 @@ export const useCart = () => {
   const addToCart = (product: Product) => {
     setCart((prevCart) => {
       const existingItem = prevCart.find((item) => item.product.id === product.id);
+
       if (existingItem) {
         return updateCartItemQuantity(cart, product.id, existingItem.quantity + 1);
       }
+
       return [...prevCart, { product, quantity: 1 }];
     });
   };
