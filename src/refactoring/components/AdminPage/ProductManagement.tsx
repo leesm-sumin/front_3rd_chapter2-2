@@ -2,6 +2,7 @@ import { useState } from "react";
 import { AddProduct } from "./AddProduct";
 import { ProductAccordion } from "./ProductAccordion";
 import { Product } from "../../../types";
+import { useProductAccordion } from "../../hooks/useProductAccordion";
 
 type ProductManagement_t = {
   products: Product[];
@@ -12,6 +13,12 @@ type ProductManagement_t = {
 export const ProductManagement = ({ products, onProductAdd, onProductUpdate }: ProductManagement_t) => {
   const [showNewProductForm, setShowNewProductForm] = useState(false);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
+
+  const { openProductIds, toggleProductAccordion } = useProductAccordion();
+
+  const handleEditProduct = (product: Product | null) => {
+    setEditingProduct(product);
+  };
 
   const addProduct = (newProduct: Product) => {
     onProductAdd(newProduct);
