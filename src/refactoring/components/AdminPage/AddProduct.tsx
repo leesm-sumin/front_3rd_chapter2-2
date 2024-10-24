@@ -5,23 +5,20 @@ type AddProduct_t = {
   onProductAdd: (newProduct: Product) => void;
 };
 
+const INITIAL_NEW_PRODUCT = {
+  name: "",
+  price: 0,
+  stock: 0,
+  discounts: [],
+};
+
 export const AddProduct = ({ onProductAdd }: AddProduct_t) => {
-  const [newProduct, setNewProduct] = useState<Omit<Product, "id">>({
-    name: "",
-    price: 0,
-    stock: 0,
-    discounts: [],
-  });
+  const [newProduct, setNewProduct] = useState<Omit<Product, "id">>(INITIAL_NEW_PRODUCT);
 
   const handleAddNewProduct = () => {
     const productWithId = { ...newProduct, id: Date.now().toString() };
     onProductAdd(productWithId);
-    setNewProduct({
-      name: "",
-      price: 0,
-      stock: 0,
-      discounts: [],
-    });
+    setNewProduct(INITIAL_NEW_PRODUCT);
   };
 
   return (
