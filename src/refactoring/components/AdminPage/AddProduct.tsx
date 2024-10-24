@@ -22,7 +22,6 @@ export const AddProduct = ({ onProductAdd }: AddProduct_t) => {
       stock: 0,
       discounts: [],
     });
-    // setShowNewProductForm(false);
   };
 
   return (

@@ -12,6 +12,11 @@ type ProductManagement_t = {
 export const ProductManagement = ({ products, onProductAdd, onProductUpdate }: ProductManagement_t) => {
   const [showNewProductForm, setShowNewProductForm] = useState(false);
 
+  const addProduct = (newProduct: Product) => {
+    onProductAdd(newProduct);
+    setShowNewProductForm(false);
+  };
+
   return (
     <div>
       <h2 className="text-2xl font-semibold mb-4">상품 관리</h2>
@@ -21,7 +26,7 @@ export const ProductManagement = ({ products, onProductAdd, onProductUpdate }: P
       >
         {showNewProductForm ? "취소" : "새 상품 추가"}
       </button>
-      {showNewProductForm && <AddProduct onProductAdd={onProductAdd} />}
+      {showNewProductForm && <AddProduct onProductAdd={addProduct} />}
       <div className="space-y-2">
         {products.map((product, index) => (
           <ProductAccordion index={index} product={product} products={products} onProductUpdate={onProductUpdate} />
