@@ -11,6 +11,7 @@ type ProductManagement_t = {
 
 export const ProductManagement = ({ products, onProductAdd, onProductUpdate }: ProductManagement_t) => {
   const [showNewProductForm, setShowNewProductForm] = useState(false);
+  const [editingProduct, setEditingProduct] = useState<Product | null>(null);
 
   const addProduct = (newProduct: Product) => {
     onProductAdd(newProduct);
@@ -29,7 +30,15 @@ export const ProductManagement = ({ products, onProductAdd, onProductUpdate }: P
       {showNewProductForm && <AddProduct onProductAdd={addProduct} />}
       <div className="space-y-2">
         {products.map((product, index) => (
-          <ProductAccordion index={index} product={product} products={products} onProductUpdate={onProductUpdate} />
+          <ProductAccordion
+            index={index}
+            isOpen={openProductIds.has(product.id)}
+            editingProduct={editingProduct}
+            product={product}
+            onProductUpdate={onProductUpdate}
+            toggleProductAccordion={toggleProductAccordion}
+            handleEditProduct={handleEditProduct}
+          />
         ))}
       </div>
     </div>
